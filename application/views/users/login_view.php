@@ -7,8 +7,8 @@
 <p>
 <?php if ($this->session->userdata('username')): ?>
 <p><?php echo "欢迎光临， " . $this->session->userdata('username') . "。<br>"; ?></p>
-<p><a href="<?php echo base_url(); ?>users/edit_info/<?php echo $this->session->userdata('id'); ?>">修改账号</a></p>
-<p><a href="<?php echo base_url(); ?>users/edit_password/<?php echo $this->session->userdata('id'); ?>">修改密码</a></p>
+<p><a href="<?php echo base_url(); ?>users/edit_info/<?php echo $this->session->userdata('id'); ?>">修改账号信息</a></p>
+<p><a href="<?php echo base_url(); ?>users/edit_password/<?php echo $this->session->userdata('id'); ?>">修改用户密码</a></p>
 <?php endif; ?>
 </p>
 

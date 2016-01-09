@@ -123,38 +123,28 @@ class Users extends CI_Controller {
 		} else {
 
 			$sql_password = $this->user_model->get_user_password($user_id);
-			$options = ['cost'=>12];
-			$encripted_old_pass = password_hash($this->input->post('old_password'), PASSWORD_BCRYPT, $options);
+			$encripted_old_pass = $this->input->post('old_password');
+			$options = ['cost'=>12];			
 			$encripted_pass = password_hash($this->input->post('password'), PASSWORD_BCRYPT, $options);
-			$old_password = $this->input->post('old_password');
-			$password = $this->input->post('password');
-			$data = array(
-				'sql_password'=>$sql_password,
-				'encripted_old_pass'=>$encripted_old_pass,
-				'encripted_pass'=>$encripted_pass,
-				'password'=>$password,
-				'old_password'=>$old_password
-			);
-			$data['main_view'] = 'users/err';
-			$this->load->view('layouts/main', $data);
-			// if ($sql_password == $encripted_old_pass) {
-			// 	$data = array(
-			// 		'id'=>$this->session->userdata('id'),
-			// 		'password'=>$encripted_pass
-			// 	);
+			
+			if (password_verify($encripted_old_pass, $sql_password)) {
+				$data = array(
+					'id'=>$this->session->userdata('id'),
+					'password'=>$encripted_pass
+				);
 
-			// 	if ($this->user_model->user_edit($user_id, $data)){
+				if ($this->user_model->user_edit($user_id, $data)){
 
-			// 		$this->session->set_flashdata('user_password_updated', '用户密码已修改。');
-			// 		redirect('users/edit_password/' . $this->session->userdata('id'));
+					$this->session->set_flashdata('user_password_updated', '用户密码已修改。');
+					redirect('users/edit_password/' . $this->session->userdata('id'));
 
-			// 	}
-			// } else {
+				}
+			} else {
 
-			// 	$this->session->set_flashdata('user_pass_err', '原密码错误。');
-			// 	redirect('users/edit_password/' . $this->session->userdata('id'));
+				$this->session->set_flashdata('user_pass_err', '原密码错误。');
+				redirect('users/edit_password/' . $this->session->userdata('id'));
 
-			// }
+			}
 
 		}
 		
