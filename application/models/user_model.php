@@ -31,6 +31,20 @@ class User_model extends CI_Model {
 
 	}
 
+	public function user_is_admin($username, $password) {
+
+		$this->db->where('username', $username);
+		$result = $this->db->get('users');
+		$db_password = $result->row(2)->password;
+
+		if (password_verify($password, $db_password)) {
+			return $result->row(5)->is_admin;
+		} else {
+			return false;
+		}
+
+	}
+
 	public function user_edit($user_id, $data) {
 
 		$this->db->where('id', $user_id);
@@ -45,6 +59,13 @@ class User_model extends CI_Model {
 		$this->db->where('id', $user_id);
 		$query = $this->db->get('users');
 		return $query->row();
+
+	}
+
+	public function get_users() {
+
+		$query = $this->db->get('users');
+		return $query->result();
 
 	}
 

@@ -6,9 +6,20 @@
 
 <p>
 <?php if ($this->session->userdata('username')): ?>
-<p><?php echo "欢迎光临， " . $this->session->userdata('username') . "。<br>"; ?></p>
-<p><a href="<?php echo base_url(); ?>users/edit_info/<?php echo $this->session->userdata('id'); ?>">修改账号信息</a></p>
-<p><a href="<?php echo base_url(); ?>users/edit_password/<?php echo $this->session->userdata('id'); ?>">修改用户密码</a></p>
+<p>
+	<?php echo "欢迎光临， " . $this->session->userdata('username'); ?>
+	<?php 
+		if ($this->session->userdata('is_admin')) {
+			echo  "管理员。<br>";
+			echo '<p><a href="' . base_url() . 'user_edit/edit_users">管理所有用户</a></p>';
+		} else {
+			echo  "会员。<br>";
+		}
+	?>
+</p>
+
+<p><a href="<?php echo base_url(); ?>user_edit/edit_info/<?php echo $this->session->userdata('id'); ?>">修改个人信息</a></p>
+<p><a href="<?php echo base_url(); ?>user_edit/edit_password/<?php echo $this->session->userdata('id'); ?>">修改个人密码</a></p>
 <?php endif; ?>
 </p>
 
