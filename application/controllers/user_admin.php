@@ -35,13 +35,13 @@ class User_admin extends CI_Controller
             $this->load->view('layouts/main', $data);
         } else {
             $data = array(
-                'id' => $this->session->userdata('id'),
+                'id' => $user_id,
                 'username' => $this->input->post('username'),
                 'email' => $this->input->post('email')
             );
-            $user_data = $this->user_model->get_user_info($user_id);
+            $username = $this->user_model->get_username($user_id);
             if ($this->user_model->user_edit($user_id, $data)) {
-                $this->session->set_flashdata('admin_user_edited', $user_data->username . '用户信息已完成修改。');
+                $this->session->set_flashdata('admin_user_edited', $username . '用户信息已完成修改。');
                 redirect('user_admin/edit_users/');
             }
         }
@@ -50,11 +50,29 @@ class User_admin extends CI_Controller
     public function delete_user($user_id)
     {
         //删除用户
+        $username = $this->user_model->get_username($user_id);
+        $this->session->set_flashdata('user_deleted', $username . '用户已被删除。');
+        $this->user_model->delete_user($user_id);
+        redirect('user_admin/edit_users/');
     }
 
     public function init_pass($user_id)
     {
         //初始化密码
+        $options = ['cost' => 12];
+        $password = '888';
+        $username=$this->user_model->get_username($user_id);
+        $encripted_pass = password_hash($password, PASSWORD_BCRYPT, $options);
+        $data = array(
+            'id' => $user_id,
+            'password' => $encripted_pass
+        );
+
+        if ($this->user_model->user_edit($user_id, $data)) {
+            $this->session->set_flashdata('user_init_pass', $username . '用户密码已初始化,初始化密码为888。');
+            redirect('user_admin/edit_users/');
+        }
+
     }
 
     public function grant_admin($user_id)

@@ -16,7 +16,7 @@
 
 <?php $attributes = array('id'=>'edit_user_password', 'class'=>'form_horizontal'); ?>
 
-<?php echo form_open('users/edit_password/' . $this->session->userdata('id'), $attributes); ?>
+<?php echo form_open('user_edit/edit_password/' . $this->session->userdata('id'), $attributes); ?>
 
 <div class="form-group">
 <?php echo form_label('原密码'); ?>

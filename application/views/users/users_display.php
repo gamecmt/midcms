@@ -4,6 +4,12 @@
     <?php if ($this->session->flashdata('admin_user_edited')): ?>
         <?php echo $this->session->flashdata('admin_user_edited'); ?>
     <?php endif; ?>
+    <?php if ($this->session->flashdata('user_deleted')): ?>
+        <?php echo $this->session->flashdata('user_deleted'); ?>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('user_init_pass')): ?>
+        <?php echo $this->session->flashdata('user_init_pass'); ?>
+    <?php endif; ?>
 </p>
 
 <table class="table table-hover">

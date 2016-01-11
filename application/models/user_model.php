@@ -55,6 +55,13 @@ class User_model extends CI_Model
         return $query->row();
     }
 
+    public function get_username($user_id)
+    {
+        $this->db->where('id', $user_id);
+        $query = $this->db->get('users');
+        return $query->row(1)->username;
+    }
+
     public function get_users()
     {
         $query = $this->db->get('users');
@@ -66,6 +73,12 @@ class User_model extends CI_Model
         $this->db->where('id', $user_id);
         $query = $this->db->get('users');
         return $query->row(2)->password;
+    }
+
+    public function delete_user($user_id)
+    {
+        $this->db->where('id', $user_id);
+        $this->db->delete('users');
     }
 }
 
