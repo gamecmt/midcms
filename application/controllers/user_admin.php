@@ -61,7 +61,7 @@ class User_admin extends CI_Controller
         //初始化密码
         $options = ['cost' => 12];
         $password = '888';
-        $username=$this->user_model->get_username($user_id);
+        $username = $this->user_model->get_username($user_id);
         $encripted_pass = password_hash($password, PASSWORD_BCRYPT, $options);
         $data = array(
             'id' => $user_id,
