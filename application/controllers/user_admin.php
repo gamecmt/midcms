@@ -69,7 +69,7 @@ class User_admin extends CI_Controller
         );
 
         if ($this->user_model->user_edit($user_id, $data)) {
-            $this->session->set_flashdata('user_init_pass', $username . '用户密码已初始化,初始化密码为888。');
+            $this->session->set_flashdata('user_init_pass', $username . '用户密码已经初始化， 初始化密码为“888”。');
             redirect('user_admin/edit_users/');
         }
 
@@ -78,11 +78,19 @@ class User_admin extends CI_Controller
     public function grant_admin($user_id)
     {
         //授予管理员权限
+        $this->user_model->grant_admin_user($user_id);
+        $username = $this->user_model->get_username($user_id);
+        $this->session->set_flashdata('grant_admin', '已授予' . $username . '管理员权限。');
+        redirect('user_admin/edit_users/');
     }
 
     public function revoke_admin($user_id)
     {
         //移除管理员权限
+        $this->user_model->revoke_admin_user($user_id);
+        $username = $this->user_model->get_username($user_id);
+        $this->session->set_flashdata('revoke_admin', '已取消' . $username . '管理员权限。');
+        redirect('user_admin/edit_users/');
     }
 }
 

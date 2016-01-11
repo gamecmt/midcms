@@ -10,6 +10,12 @@
     <?php if ($this->session->flashdata('user_init_pass')): ?>
         <?php echo $this->session->flashdata('user_init_pass'); ?>
     <?php endif; ?>
+    <?php if ($this->session->flashdata('grant_admin')): ?>
+        <?php echo $this->session->flashdata('grant_admin'); ?>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('revoke_admin')): ?>
+        <?php echo $this->session->flashdata('revoke_admin'); ?>
+    <?php endif; ?>
 </p>
 
 <table class="table table-hover">

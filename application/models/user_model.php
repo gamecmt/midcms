@@ -80,6 +80,22 @@ class User_model extends CI_Model
         $this->db->where('id', $user_id);
         $this->db->delete('users');
     }
+
+    public function grant_admin_user($user_id)
+    {
+        $this->db->set('is_admin', 1);
+        $this->db->where('id', $user_id);
+        $this->db->update('users');
+        return true;
+    }
+
+    public function revoke_admin_user($user_id)
+    {
+        $this->db->set('is_admin', 0);
+        $this->db->where('id', $user_id);
+        $this->db->update('users');
+        return true;
+    }
 }
 
 ?>
