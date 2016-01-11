@@ -5,7 +5,7 @@
 		<tr>
 			<th align="center">用户账号</th>
 			<th align="center">电子邮箱</th>
-			<th align="center" colspan="4">管    理</th>
+			<th align="center" colspan="4">管理</th>
 		</tr>
 	</thead>
 	<tbody>
