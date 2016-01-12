@@ -16,8 +16,23 @@ class User_edit extends CI_Controller
     public function edit_info($user_id)
     {
         //编辑用户信息
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[3]|valid_email');
+        $this->form_validation->set_rules(
+            'username', 'Username',
+            'trim|required|min_length[3]',
+            array(
+                'required' => '您没有输入用户名。',
+                'min_length[3]' => '用户名不能低于3个字符'
+            )
+        );
+        $this->form_validation->set_rules(
+            'email', 'Email',
+            'trim|required|min_length[3]|valid_email',
+            array(
+                'required' => '您没有输入电子邮箱',
+                'min_length[3]' => '电子邮箱不能低于3个字符',
+                'valid_email' => '电子邮箱格式不正确。'
+            )
+        );
         if ($this->form_validation->run() == false) {
             $data['user_data'] = $this->user_model->get_user_info($user_id);
             $data['main_view'] = 'users/user_edit_info';
@@ -38,9 +53,31 @@ class User_edit extends CI_Controller
     public function edit_password($user_id)
     {
         //编辑用户的密码,sql_password为数据库里加密的密码,$encripted_old_pass为旧密码,$encripted_pass为加密后的新密码
-        $this->form_validation->set_rules('old_password', 'Old Password', 'trim|required|min_length[3]');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]');
-        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|min_length[3]|matches[password]');
+        $this->form_validation->set_rules(
+            'old_password', 'Old Password',
+            'trim|required|min_length[3]',
+            array(
+                'required' => '密码框没有输入。',
+                'min_length[3]' => '密码不能低于3个字符'
+            )
+        );
+        $this->form_validation->set_rules(
+            'password', 'Password',
+            'trim|required|min_length[3]',
+            array(
+                'required' => '密码框没有输入。',
+                'min_length[3]' => '密码不能低于3个字符'
+            )
+        );
+        $this->form_validation->set_rules(
+            'confirm_password', 'Confirm Password',
+            'trim|required|min_length[3]|matches[password]',
+             array(
+                 'required' => '重复密码框没有输入。',
+                 'min_length[3]' => '密码不能低于3个字符',
+                 'matches' => '两次密码输入不一致。'
+             )
+        );
         if ($this->form_validation->run() == false) {
             $data['user_data'] = $this->user_model->get_user_info($user_id);
             $data['main_view'] = 'users/user_edit_password';
