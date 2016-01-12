@@ -40,7 +40,7 @@ class User_edit extends CI_Controller
         //编辑用户的密码,sql_password为数据库里加密的密码,$encripted_old_pass为旧密码,$encripted_pass为加密后的新密码
         $this->form_validation->set_rules('old_password', 'Old Password', 'trim|required|min_length[3]');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]');
-        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|min_length[3]');
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|min_length[3]|matches[password]');
         if ($this->form_validation->run() == false) {
             $data['user_data'] = $this->user_model->get_user_info($user_id);
             $data['main_view'] = 'users/user_edit_password';

@@ -1,5 +1,6 @@
 <h1>用户列表</h1>
 
+<p><a href="<?php echo base_url(); ?>user_admin/add_user">新增用户</a></p>
 <p class="bg-success">
     <?php if ($this->session->flashdata('admin_user_edited')): ?>
         <?php echo $this->session->flashdata('admin_user_edited'); ?>
@@ -15,6 +16,9 @@
     <?php endif; ?>
     <?php if ($this->session->flashdata('revoke_admin')): ?>
         <?php echo $this->session->flashdata('revoke_admin'); ?>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata('add_user')): ?>
+        <?php echo $this->session->flashdata('add_user'); ?>
     <?php endif; ?>
 </p>
 

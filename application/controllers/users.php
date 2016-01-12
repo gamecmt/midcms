@@ -8,7 +8,7 @@ class Users extends CI_Controller
         //检查各个参数是否合法,是则添加新用户,否则换回注册界面
         $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]');
-        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|min_length[3]');
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|min_length[3]|matches[password]');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[3]');
         if ($this->form_validation->run() == false) {
             $data['main_view'] = "users/register_view";

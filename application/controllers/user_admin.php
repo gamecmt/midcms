@@ -92,6 +92,25 @@ class User_admin extends CI_Controller
         $this->session->set_flashdata('revoke_admin', '已取消' . $username . '管理员权限。');
         redirect('user_admin/edit_users/');
     }
+
+    public function add_user()
+    {
+        //检查各个参数是否合法,是则添加新用户,否则换回注册界面
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]');
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|min_length[3]|matches[password]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[3]');
+        if ($this->form_validation->run() == false) {
+            $data['main_view'] = "users/admin_add_user";
+            $this->load->view('layouts/main', $data);
+        } else {
+            $username = $this->input->post('username');
+            if ($this->user_model->create_user()) {
+                $this->session->set_flashdata('add_user', '新增' . $username . '用户成功！');
+                redirect('user_admin/edit_users/');
+            }
+        }
+    }
 }
 
 ?>
