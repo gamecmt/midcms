@@ -17,7 +17,7 @@ class User_edit extends CI_Controller
     {
         //编辑用户信息
         $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[3]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[3]|valid_email');
         if ($this->form_validation->run() == false) {
             $data['user_data'] = $this->user_model->get_user_info($user_id);
             $data['main_view'] = 'users/user_edit_info';
