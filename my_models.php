@@ -18,6 +18,7 @@
  * @property film_model       $film_model
  * @property film_model1      $film_model1
  * @property user_model      $user_model
+ * @property news_model      $news_model
  *
  *
  *

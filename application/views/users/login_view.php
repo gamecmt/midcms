@@ -9,15 +9,20 @@
             if ($this->session->userdata('is_admin')) {
                 echo "管理员。<br>";
                 echo '<p><a href="' . base_url() . 'user_admin/edit_users">管理所有用户</a></p>';
+                echo '<p><a href="' . base_url() . 'news/get_all_news">管理所有新闻</a></p>';
             } else {
                 echo "会员。<br>";
             }
             ?>
         </p>
         <p>
+            <a href="<?php echo base_url(); ?>news/get_user_news/<?php echo $this->session->userdata('id'); ?>">管理发表新闻</a>
+        </p>
+        <p>
             <a href="<?php echo base_url(); ?>user_edit/edit_info/<?php echo $this->session->userdata('id'); ?>">修改个人信息</a>
         </p>
-        <p><a href="<?php echo base_url(); ?>user_edit/edit_password/<?php echo $this->session->userdata('id'); ?>">修改个人密码</a>
+        <p>
+            <a href="<?php echo base_url(); ?>user_edit/edit_password/<?php echo $this->session->userdata('id'); ?>">修改个人密码</a>
         </p>
     <?php endif; ?>
     <?php
