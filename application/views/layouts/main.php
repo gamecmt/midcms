@@ -29,7 +29,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="<?php echo base_url(); ?>">首页 <span class="sr-only">(current)</span></a></li>
         <?php if ($this->session->userdata('logged_in')): ?>
-        <li><a href="<?php echo base_url(); ?>projects">Projects </a></li>
+        <li><a href="<?php echo base_url(); ?>news/get_user_news/<?php echo $this->session->userdata('id'); ?>">新闻 </a></li>
         <?php endif; ?>
         <li><a href="<?php echo base_url(); ?>users/register">注册 </a></li>
       </ul>

@@ -19,7 +19,7 @@
     <tbody>
     <?php foreach ($news as $news_item): ?>
         <tr>
-            <td><?php echo $news_item->title; ?></td>
+            <td><a href="<?php echo base_url(); ?>news/display/<?php echo $news_item->id; ?>"><?php echo $news_item->title; ?></a></td>
             <td><?php echo $news_item->date; ?></td>
             <td><?php echo $news_item->author; ?></td>
             <td><a href="<?php echo base_url(); ?>news/edit_news/<?php echo $news_item->id; ?>">编辑</a></td>
