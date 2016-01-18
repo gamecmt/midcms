@@ -1,3 +1,10 @@
+<script type="text/javascript" src="<?php echo base_url();?>assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/ueditor/ueditor.all.js"></script>
+<script type="text/javascript">
+    var editor = new baidu.editor.ui.Editor();
+    editor.render("content");
+</script>
+
 <h2>添加新闻</h2>
 
 <?php echo validation_errors('<p class="bg-danger">'); ?>
@@ -18,16 +25,8 @@
     <?php echo form_input($data); ?>
 </div>
 
-<div class="form-group">
-    <?php echo form_label('内容'); ?>
-    <?php
-    $data = array(
-        'class' => 'form-control',
-        'name' => 'content'
-    );
-    ?>
-    <?php echo form_textarea($data); ?>
-</div>
+<label>内容</label>
+<textarea  name="content" id="content" ></textarea>
 
 <div class="form-group">
     <?php echo form_label('作者'); ?>
@@ -52,3 +51,5 @@
 </div>
 
 <?php echo form_close(); ?>
+
+

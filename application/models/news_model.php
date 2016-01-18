@@ -18,7 +18,7 @@ class News_Model extends CI_Model
     public function get_all_news()
     {
         //显示任何用户的所有新闻
-        //出现问题, user_id和news_id混淆了
+        $this->db->select('news.id, title, date, author, content, click, display, user_id, users.username, is_admin');
         $this->db->join('users', 'news.user_id = users.id');
         $query = $this->db->get('news');
         return $query->result();
@@ -32,14 +32,26 @@ class News_Model extends CI_Model
         return $query->result();
     }
 
-    public function delete_news($news_id){
+    public function delete_news($news_id)
+    {
+        //删除新闻
         $this->db->where('id', $news_id);
         $this->db->delete('news');
     }
 
-    public function get_title($news_id){
-        $this->db->where('id',$news_id);
+    public function get_title($news_id)
+    {
+        //得到新闻标题
+        $this->db->where('id', $news_id);
         $query = $this->db->get('news');
         return $query->row(1)->title;
+    }
+
+    public function get_news($news_id)
+    {
+        //得到当前id的新闻
+        $this->db->where('id', $news_id);
+        $query = $this->db->get('news');
+        return $query->row();
     }
 }

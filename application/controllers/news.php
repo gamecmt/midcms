@@ -10,6 +10,8 @@ class News extends CI_Controller
             $this->session->set_flashdata('no_access', '抱歉，您还没有登录。');
             redirect('home');
         }
+        //调用ueditor编辑器
+        $this->load->helper('url');
     }
 
     public function index()
@@ -61,7 +63,7 @@ class News extends CI_Controller
     {
         //显示所有新闻信息，并将数据传输给view中的news_display
         $data['news'] = $this->news_model->get_all_news();
-        $data['main_view'] = "news/news_display";
+        $data['main_view'] = "news/news_menu";
         $this->load->view('layouts/main', $data);
     }
 
@@ -70,22 +72,33 @@ class News extends CI_Controller
         //显示该用户发布的所有新闻信息，并将数据传输给view中的news_display
         $user_id = $this->session->userdata('id');
         $data['news'] = $this->news_model->get_user_news($user_id);
-        $data['main_view'] = "news/user_news_display";
+        $data['main_view'] = "news/user_news_menu";
         $this->load->view('layouts/main', $data);
     }
 
-    public function delete_news($news_id){
+    public function delete_news($news_id)
+    {
+        //删除新闻(用户权限)
         $this->news_model->delete_news($news_id);
         $title = $this->news_model->get_title($news_id);
         $this->session->set_flashdata('news_deleted', $title . '新闻已被删除。');
         redirect('news/get_user_news/');
     }
 
-    public function admin_delete_news($news_id){
+    public function admin_delete_news($news_id)
+    {
+        //删除新闻(管理员权限)
         $this->news_model->delete_news($news_id);
         $title = $this->news_model->get_title($news_id);
         $this->session->set_flashdata('news_deleted', $title . '新闻已被删除。');
         redirect('news/get_all_news/');
+    }
+
+    public function display($news_id)
+    {
+        $data['news_data'] = $this->news_model->get_news($news_id);
+        $data['main_view'] = "news/display";
+        $this->load->view('layouts/main', $data);
     }
 }
 
