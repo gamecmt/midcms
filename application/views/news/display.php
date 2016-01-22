@@ -7,8 +7,8 @@
 
 <div class="col-xs-3 pull-right">
     <ul class="list-group">
-        <h4>快速操作</h4>
-        <li class="list-group-item"><a href="<?php echo base_url(); ?>news/edit/<?php echo $news_data->id; ?>">编辑</a></li>
-        <li class="list-group-item"><a href="<?php echo base_url(); ?>news/delete/<?php echo $news_data->id; ?>">删除</a></li>
+        <h3>快速操作</h3>
+        <li class="list-group-item"><a href="<?php echo base_url(); ?>news/edit_news/<?php echo $news_data->id; ?>">编辑</a></li>
+        <li class="list-group-item"><a href="<?php echo base_url(); ?>news/delete_news/<?php echo $news_data->id; ?>">删除</a></li>
     </ul>
 </div>

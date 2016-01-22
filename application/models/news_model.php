@@ -54,4 +54,11 @@ class News_Model extends CI_Model
         $query = $this->db->get('news');
         return $query->row();
     }
+
+    public function update_news($news_id, $data)
+    {
+        $this->db->where('id', $news_id);
+        $this->db->update('news', $data);
+        return true;
+    }
 }
